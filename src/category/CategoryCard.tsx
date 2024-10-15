@@ -1,7 +1,17 @@
-const CategoryCard = ({ title, i }: { title: string; i: number }) => {
+import { Link } from "react-router-dom";
+
+const CategoryCard = ({
+  title,
+  i,
+  id,
+}: {
+  title: string;
+  i: number;
+  id: number;
+}) => {
   return (
     <>
-      <div className="md:w-2/12  w-full my-1 ">
+      <Link to={`/category/${id}`} className="md:w-2/12  w-full my-1 ">
         <span
           data-cro-id="hp-categories-icons"
           className="h-40 flex-1 max-w-[143px]"
@@ -22,7 +32,7 @@ const CategoryCard = ({ title, i }: { title: string; i: number }) => {
             </p>
           </a>
         </span>
-      </div>
+      </Link>
     </>
   );
 };

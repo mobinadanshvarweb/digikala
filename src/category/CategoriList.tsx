@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
 import { getCategory } from "../api/getCategory";
 import CategoryCard from "./CategoryCard";
+import { useQuery } from "@tanstack/react-query";
 
 const CategoriList = () => {
-  const [data, setData] = useState({ result: [] });
-  console.log(data, "data");
+  const { data } = useQuery({
+    queryKey: ["category-list"],
+    queryFn: async () => await getCategory(),
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const newData = await getCategory();
-
-      setData(newData);
-    };
-    fetchData();
-  }, []);
   return (
     <div className="flex flex-wrap w-full gap-2  justify-center">
-      {data?.result?.map((item: { title: string; id: number }, i) => {
-        return <CategoryCard key={item.id} i={i} title={item.title} />;
+      {data?.result?.map((item: { title: string; id: number }, i: number) => {
+        return (
+          <CategoryCard key={item.id} i={i} title={item.title} id={item.id} />
+        );
       })}
     </div>
   );

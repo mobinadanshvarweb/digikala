@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
-import { getCategory } from "./api/getCategory";
+import Blog from "./Blog";
+import Categori from "./category/Categori";
+import Slider from "./component/Slider";
 
 function App() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const newData = await getCategory();
-
-      setData(newData);
-    };
-    fetchData();
-  }, []);
   return (
-    <div className="flex flex-wrap w-full gap-4">
-      {data?.map((item) => {
-        return <div className="border p-3 text-red-600">{item}</div>;
-      })}
+    <div className="flex flex-col">
+      <Slider />
+      <Categori />
+      <Blog />
     </div>
   );
 }
