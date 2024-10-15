@@ -2,19 +2,23 @@ import * as ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout";
-import Blog from "./Blog";
-import Categori from "./category/Categori";
+import App from "./App";
+import CategoryDetail from "./category/CategoryDetail";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
-      { path: "/", element: <Blog /> },
-      { path: "/home", element: <Categori /> },
+      { path: "/", element: <App /> },
+      { path: "/category/:id", element: <CategoryDetail /> },
     ],
   },
 ]);
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <RouterProvider router={router} />
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+  </QueryClientProvider>
 );
